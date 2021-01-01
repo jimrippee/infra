@@ -7,8 +7,19 @@ http:
       service: service-axis
       tls:
         certResolver: route53
+    router-proxmox:
+      entryPoints:
+        - websecure
+      rule: Host(`vm.cencalcomputer.com`)
+      service: service-proxmox
+      tls:
+        certResolver: route53    
   services:
     service-axis:
       loadBalancer:
         servers:
                 - url: "http://192.168.12.129:80"
+    service-proxmox:
+      loadBalancer:
+        servers:
+                - url: "https://192.168.1.71:8006"              
