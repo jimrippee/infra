@@ -1,0 +1,20 @@
+---
+version: "2"
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    volumes:
+      - ./data/traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    environment:
+      - AWS_ACCESS_KEY_ID=$KEYID
+      - AWS_SECRET_ACCESS_KEY=$SECKEY
+      - AWS_HOSTED_ZONE_ID=$ZONE_ID
+      - AWS_REGION=$REGION
+    restart: unless-stopped
+

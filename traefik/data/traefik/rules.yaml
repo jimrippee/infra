@@ -1,0 +1,14 @@
+http:
+  routers:
+    router-axis:
+      entryPoints:
+        - websecure
+      rule: Host(`cam.cencalcomputer.com`)
+      service: service-axis
+      tls:
+        certResolver: route53
+  services:
+    service-axis:
+      loadBalancer:
+        servers:
+                - url: "http://192.168.12.129:80"
